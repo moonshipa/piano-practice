@@ -1,0 +1,1729 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="kimetsu">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#2e7d6b">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="练琴打卡">
+<meta name="application-name" content="练琴打卡">
+<meta name="format-detection" content="telephone=no">
+<link rel="manifest" href="manifest.json">
+<link rel="icon" type="image/png" sizes="192x192" href="assets/icon-192.png">
+<link rel="icon" type="image/png" sizes="512x512" href="assets/icon-512.png">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<title>练琴打卡</title>
+<style>
+:root{
+  /* 蜜桃粉（默认） */
+  --page-bg:#f6ebee;
+  --bg:#fdf7f8;
+  --top:rgba(253,247,248,.92);
+  --card:#ffffff;
+  --ink:#302528;
+  --sub:#7d6a70;
+  --muted:#ad9ba1;
+  --brand:#e0708c;
+  --brand-dark:#b54f6b;
+  --brand-soft:#fdeef1;
+  --accent:#c49ad6;
+  --line:#f4e6ea;
+  --track:#f8e9ed;
+  --fill:#fbf5f6;
+  --danger:#d2455e;
+  --danger-soft:#fdeef0;
+  --mask:rgba(88,58,68,.40);
+  --ring-stroke:var(--brand);
+  --pat-seigaiha:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='40' height='20'><g fill='none' stroke='%23000' stroke-width='1'><path d='M-10 20 A10 10 0 0 1 10 20'/><path d='M10 20 A10 10 0 0 1 30 20'/><path d='M30 20 A10 10 0 0 1 50 20'/><path d='M-10 15 A15 15 0 0 1 20 15'/><path d='M20 15 A15 15 0 0 1 50 15'/><path d='M-10 10 A20 20 0 0 1 30 10'/><path d='M30 10 A20 20 0 0 1 70 10'/><path d='M-10 5 A25 25 0 0 1 40 5'/></g></svg>");
+  --pat-ichimatsu:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24'><rect x='0' y='0' width='12' height='12' fill='%23000'/><rect x='12' y='12' width='12' height='12' fill='%23000'/></svg>");
+  --pat-asanoha:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='30' height='52'><g fill='none' stroke='%23000' stroke-width='1'><path d='M15 0 L30 8.66 L30 25.98 L15 34.64 L0 25.98 L0 8.66 Z'/><path d='M15 17.32 L30 25.98 M15 17.32 L0 25.98 M15 17.32 L15 34.64 M15 17.32 L30 8.66 M15 17.32 L0 8.66 M15 17.32 L15 0'/><path d='M15 52 L0 43.34 M15 52 L30 43.34 M0 43.34 L0 25.98 M30 43.34 L30 25.98'/></g></svg>");
+  --radius:18px;
+  --shadow:0 3px 14px rgba(224,112,140,.12);
+  --lv0:#f6ecef;
+  --lv1:#fadfe6;
+  --lv2:#f6bfcd;
+  --lv3:#e995ac;
+  --lv4:#e0708c;
+}
+html[data-theme="mint"]{
+  /* 薄荷绿 */
+  --page-bg:#e8ede9;
+  --bg:#f5f8f6;
+  --top:rgba(245,248,246,.92);
+  --ink:#1e2320;
+  --sub:#6d7570;
+  --muted:#9aa29d;
+  --brand:#2e9c86;
+  --brand-dark:#217463;
+  --brand-soft:#e7f3ef;
+  --accent:#c8963e;
+  --line:#e6ebe8;
+  --track:#eceae5;
+  --fill:#f7f6f3;
+  --danger:#c0392b;
+  --danger-soft:#fdecea;
+  --mask:rgba(20,24,22,.42);
+  --shadow:0 3px 14px rgba(46,156,134,.12);
+  --lv0:#eef1ef;
+  --lv1:#dcf0ea;
+  --lv2:#b6e0d5;
+  --lv3:#79c9b6;
+  --lv4:#2e9c86;
+}
+html[data-theme="kimetsu"]{
+  /* 鬼灭之刃：和纸米白 + 朱红 + 金 + 炭治郎羽织市松纹 */
+  --page-bg:#e5ddcd;
+  --bg:#f8f4ea;
+  --top:rgba(248,244,234,.94);
+  --card:#fffdf7;
+  --ink:#211d1a;
+  --sub:#6d6258;
+  --muted:#9c9287;
+  --brand:#c1272d;
+  --brand-dark:#8c1a1f;
+  --brand-soft:#f8e9e3;
+  --accent:#d4a24c;
+  --line:#ece3d2;
+  --track:#efe6d5;
+  --fill:#fdfaf2;
+  --danger:#a01d22;
+  --danger-soft:#f9e8e3;
+  --mask:rgba(40,28,22,.46);
+  --ring-stroke:url(#ringGrad);
+  --shadow:0 3px 14px rgba(150,60,35,.14);
+  --lv0:#f0e8d8;
+  --lv1:#f8d9a6;
+  --lv2:#f2b169;
+  --lv3:#e2622c;
+  --lv4:#c1272d;
+  --check-a:#2b4034;
+  --check-b:#121c16;
+  --serif:"Hiragino Mincho ProN","Yu Mincho","Songti SC","STSong","SimSun",serif;
+}
+/* 顶部市松纹（炭治郎羽织）细带 */
+html[data-theme="kimetsu"] .topbar::after{
+  content:'';position:absolute;left:0;right:0;bottom:-1px;height:5px;
+  background:conic-gradient(var(--check-a) 25%, var(--check-b) 0 50%, var(--check-a) 0 75%, var(--check-b) 0) 0 0/10px 10px;
+}
+/* 和纸竖纹 */
+html[data-theme="kimetsu"] body{
+  background-image:repeating-linear-gradient(90deg, rgba(120,90,60,.035) 0 1px, transparent 1px 5px);
+}
+/* 明朝体标题，营造和风 */
+html[data-theme="kimetsu"] .topbar h1,
+html[data-theme="kimetsu"] .cal-title,
+html[data-theme="kimetsu"] .stat .v,
+html[data-theme="kimetsu"] .clock,
+html[data-theme="kimetsu"] .piece-name,
+html[data-theme="kimetsu"] .sheet h3{font-family:var(--serif);letter-spacing:1px}
+html[data-theme="kimetsu"] .card-title>span:first-child::before{
+  content:'';display:inline-block;width:3px;height:11px;background:var(--brand);
+  margin-right:7px;vertical-align:-1px;border-radius:2px;
+}
+html[data-theme="kimetsu"] .streak-badge{border:1px solid rgba(193,39,45,.25)}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;padding:0}
+body{
+  background:var(--page-bg);
+  color:var(--ink);
+  font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+  font-size:15px;
+  line-height:1.5;
+  -webkit-font-smoothing:antialiased;
+}
+.app{
+  max-width:480px;margin:0 auto;min-height:100vh;
+  background:var(--bg);
+  padding-bottom:calc(78px + env(safe-area-inset-bottom));
+  position:relative;overflow-x:hidden;
+}
+@media(min-width:520px){
+  .app{box-shadow:0 0 40px rgba(0,0,0,.12)}
+}
+
+/* ---------- header ---------- */
+.topbar{
+  position:sticky;top:0;z-index:30;
+  background:var(--top);
+  backdrop-filter:saturate(160%) blur(10px);
+  padding:calc(12px + env(safe-area-inset-top)) 16px 10px;
+  display:flex;align-items:center;justify-content:space-between;
+  border-bottom:1px solid var(--line);
+}
+.topbar h1{margin:0;font-size:17px;font-weight:600;letter-spacing:.5px}
+.streak-badge{
+  display:flex;align-items:center;gap:5px;
+  background:var(--brand-soft);color:var(--brand-dark);
+  padding:5px 11px;border-radius:999px;font-size:12px;font-weight:600;
+}
+.streak-badge svg{width:13px;height:13px}
+
+/* ---------- 背景层（用户图片 + 和风底纹） ---------- */
+.layer{
+  position:fixed;top:0;bottom:0;left:0;right:0;
+  max-width:480px;margin:0 auto;pointer-events:none;z-index:0;
+}
+#appBg{background-size:cover;background-position:62% center;opacity:.24;transition:opacity .25s ease}
+#appPattern{opacity:.08;background-repeat:repeat}
+#appPattern[data-p="seigaiha"]{background-image:var(--pat-seigaiha);background-size:40px 20px}
+#appPattern[data-p="ichimatsu"]{background-image:var(--pat-ichimatsu);background-size:24px 24px}
+#appPattern[data-p="asanoha"]{background-image:var(--pat-asanoha);background-size:30px 52px}
+
+/* ---------- pages ---------- */
+.page{display:none;padding:14px 16px 20px;animation:fade .22s ease;position:relative;z-index:1}
+.page.active{display:block}
+@keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+
+.card{background:var(--card);border-radius:var(--radius);padding:16px;margin-bottom:12px;box-shadow:var(--shadow)}
+.card-title{font-size:13px;color:var(--sub);font-weight:600;margin:0 0 12px;display:flex;align-items:center;justify-content:space-between}
+.card-title .act{color:var(--brand);font-weight:600;font-size:12px;cursor:pointer}
+
+/* ---------- timer ---------- */
+.timer-wrap{display:flex;flex-direction:column;align-items:center;padding:8px 0 4px}
+.ring{position:relative;width:230px;height:230px}
+.ring svg{width:100%;height:100%;transform:rotate(-90deg)}
+.ring .track{fill:none;stroke:var(--track);stroke-width:14}
+.ring .bar{fill:none;stroke:var(--ring-stroke);stroke-width:14;stroke-linecap:round;transition:stroke-dashoffset .3s linear}
+.ring-center{
+  position:absolute;inset:0;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;gap:2px;
+}
+.clock{font-size:40px;font-weight:600;letter-spacing:1px;font-variant-numeric:tabular-nums}
+.clock-sub{font-size:12px;color:var(--muted);max-width:176px;text-align:center;line-height:1.35}
+.clock-piece{font-size:13px;color:var(--brand-dark);font-weight:600;max-width:150px;text-align:center;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;margin-top:2px}
+.btn-row{display:flex;gap:10px;width:100%;margin-top:16px}
+.btn{
+  flex:1;border:none;border-radius:12px;padding:13px 0;font-size:15px;font-weight:600;
+  cursor:pointer;font-family:inherit;transition:transform .12s ease,opacity .12s ease;
+}
+.btn:active{transform:scale(.97)}
+.btn-primary{background:var(--brand);color:#fff}
+.btn-ghost{background:var(--brand-soft);color:var(--brand-dark)}
+.btn-outline{background:#fff;color:var(--sub);border:1px solid var(--line)}
+.btn-danger{background:var(--danger-soft);color:var(--danger)}
+.btn:disabled{opacity:.45}
+
+/* ---------- chips ---------- */
+.chips{display:flex;gap:8px;overflow-x:auto;padding:2px 0 6px;scrollbar-width:none}
+.chips::-webkit-scrollbar{display:none}
+.chip{
+  flex:none;padding:8px 14px;border-radius:999px;background:#fff;
+  border:1px solid var(--line);font-size:13px;color:var(--sub);cursor:pointer;white-space:nowrap;
+}
+.chip.on{background:var(--brand);border-color:var(--brand);color:#fff;font-weight:600}
+.chip.add{color:var(--brand);border-style:dashed;font-weight:600}
+
+/* ---------- list ---------- */
+.rec{display:flex;gap:12px;padding:11px 0;border-bottom:1px solid var(--line);align-items:flex-start}
+.rec:last-child{border-bottom:none}
+.rec-dot{width:8px;height:8px;border-radius:50%;background:var(--brand);margin-top:7px;flex:none}
+.rec-main{flex:1;min-width:0}
+.rec-top{display:flex;justify-content:space-between;gap:10px;align-items:baseline}
+.rec-name{font-weight:600;font-size:14px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.rec-dur{font-size:13px;color:var(--brand-dark);font-weight:600;flex:none;font-variant-numeric:tabular-nums}
+.rec-meta{font-size:12px;color:var(--muted);margin-top:2px}
+.rec-note{font-size:12.5px;color:var(--sub);margin-top:5px;background:var(--brand-soft);border-radius:8px;padding:6px 9px;white-space:pre-wrap;word-break:break-word}
+.empty{text-align:center;color:var(--muted);font-size:13px;padding:22px 0}
+
+/* ---------- stats ---------- */
+.stats{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.stat{background:var(--card);border-radius:14px;padding:13px 14px}
+.stat .v{font-size:22px;font-weight:700;font-variant-numeric:tabular-nums;line-height:1.2}
+.stat .v small{font-size:12px;font-weight:600;color:var(--sub);margin-left:2px}
+.stat .k{font-size:11.5px;color:var(--muted);margin-top:3px}
+.stat.hl .v{color:var(--brand)}
+
+/* ---------- calendar ---------- */
+.cal-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+.cal-title{font-weight:600;font-size:15px}
+.cal-nav{display:flex;gap:6px}
+.cal-nav button{
+  width:30px;height:30px;border-radius:9px;border:1px solid var(--line);
+  background:#fff;color:var(--sub);cursor:pointer;font-size:14px;line-height:1;font-family:inherit;
+}
+.cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:5px}
+.cal-dow{text-align:center;font-size:11px;color:var(--muted);padding-bottom:4px}
+.day{
+  aspect-ratio:1/1;border-radius:11px;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;cursor:pointer;
+  font-size:13px;font-variant-numeric:tabular-nums;position:relative;
+  background:var(--lv0);color:var(--sub);transition:transform .1s ease;
+}
+.day:active{transform:scale(.94)}
+.day .m{font-size:9.5px;opacity:.75;margin-top:1px;line-height:1}
+.day.lv1{background:var(--lv1);color:var(--brand-dark)}
+.day.lv2{background:var(--lv2);color:var(--brand-dark)}
+.day.lv3{background:var(--lv3);color:#fff}
+.day.lv4{background:var(--lv4);color:#fff}
+.day.blank{background:transparent;cursor:default}
+.day.today{box-shadow:0 0 0 2px var(--accent) inset}
+.day.sel{outline:2px solid var(--brand);outline-offset:1px}
+.legend{display:flex;align-items:center;gap:6px;justify-content:flex-end;margin-top:12px;font-size:11px;color:var(--muted)}
+.legend i{width:14px;height:14px;border-radius:4px;display:inline-block}
+
+/* ---------- pieces ---------- */
+.piece{display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid var(--line)}
+.piece:last-child{border-bottom:none}
+.piece-main{flex:1;min-width:0}
+.piece-name{font-weight:600;font-size:14.5px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.piece-meta{font-size:12px;color:var(--muted);margin-top:2px}
+.tag{display:inline-block;font-size:11px;padding:2px 8px;border-radius:6px;background:var(--brand-soft);color:var(--brand-dark);margin-right:6px}
+.bar-mini{height:5px;border-radius:3px;background:var(--track);margin-top:7px;overflow:hidden}
+.bar-mini i{display:block;height:100%;background:var(--brand);border-radius:3px}
+.piece-edit{font-size:12px;color:var(--brand);flex:none;cursor:pointer;padding:4px 2px}
+
+/* ---------- settings ---------- */
+.row{display:flex;align-items:center;justify-content:space-between;padding:13px 0;border-bottom:1px solid var(--line);gap:12px}
+.row:last-child{border-bottom:none}
+.row .lbl{font-size:14px}
+.row .desc{font-size:11.5px;color:var(--muted);margin-top:2px}
+.row .ctl{display:flex;align-items:center;gap:8px;flex:none}
+.stepper{display:flex;align-items:center;gap:0;border:1px solid var(--line);border-radius:10px;overflow:hidden;background:#fff}
+.stepper button{width:32px;height:32px;border:none;background:#fff;color:var(--brand);font-size:16px;cursor:pointer;font-family:inherit}
+.stepper span{min-width:52px;text-align:center;font-weight:600;font-variant-numeric:tabular-nums;font-size:14px}
+.mini-btn{
+  border:1px solid var(--line);background:#fff;color:var(--sub);
+  border-radius:10px;padding:8px 12px;font-size:13px;cursor:pointer;font-family:inherit;
+}
+.mini-btn.danger{color:var(--danger);border-color:var(--danger-soft)}
+.about{font-size:12.5px;color:var(--muted);line-height:1.7}
+.about b{color:var(--sub)}
+
+/* ---------- tabbar ---------- */
+.tabbar{
+  position:fixed;bottom:0;left:0;right:0;z-index:40;
+  max-width:480px;margin:0 auto;
+  display:grid;grid-template-columns:repeat(4,1fr);
+  background:rgba(255,255,255,.96);
+  backdrop-filter:blur(10px);
+  border-top:1px solid var(--line);
+  padding-bottom:env(safe-area-inset-bottom);
+}
+.tab{
+  border:none;background:none;padding:9px 0 8px;cursor:pointer;font-family:inherit;
+  display:flex;flex-direction:column;align-items:center;gap:3px;color:var(--muted);font-size:11px;
+}
+.tab svg{width:22px;height:22px}
+.tab.on{color:var(--brand)}
+.tab.on svg{stroke-width:2.1}
+
+/* ---------- modal ---------- */
+.mask{
+  position:fixed;inset:0;background:var(--mask);z-index:60;
+  display:flex;align-items:flex-end;justify-content:center;
+  opacity:0;pointer-events:none;transition:opacity .2s ease;
+}
+.mask.show{opacity:1;pointer-events:auto}
+.sheet{
+  width:100%;max-width:480px;background:#fff;
+  border-radius:20px 20px 0 0;padding:18px 18px calc(18px + env(safe-area-inset-bottom));
+  transform:translateY(100%);transition:transform .26s cubic-bezier(.32,.72,0,1);
+  max-height:88vh;overflow-y:auto;
+}
+.mask.show .sheet{transform:none}
+.sheet h3{margin:0 0 14px;font-size:16px;font-weight:600}
+.field{margin-bottom:13px}
+.field label{display:block;font-size:12px;color:var(--sub);margin-bottom:6px;font-weight:600}
+.field input,.field select,.field textarea{
+  width:100%;border:1px solid var(--line);border-radius:11px;padding:11px 12px;
+  font-size:15px;font-family:inherit;color:var(--ink);background:var(--fill);outline:none;
+}
+.field input:focus,.field select:focus,.field textarea:focus{border-color:var(--brand);background:#fff}
+.field textarea{resize:vertical;min-height:70px}
+.flex2{display:flex;gap:10px}
+.flex2>div{flex:1}
+.sheet-btns{display:flex;gap:10px;margin-top:16px}
+.hint{font-size:12px;color:var(--muted);margin-top:-4px;margin-bottom:12px}
+
+/* ---------- 语音输入 ---------- */
+.field label.lbl-row{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.mic-btn{
+  display:inline-flex;align-items:center;gap:5px;white-space:nowrap;
+  border:1px solid var(--brand-soft);background:var(--brand-soft);color:var(--brand-dark);
+  border-radius:999px;padding:4px 11px;font-size:11.5px;font-weight:600;cursor:pointer;font-family:inherit;
+}
+.mic-btn svg{width:13px;height:13px}
+.mic-btn.on{background:var(--brand);border-color:var(--brand);color:#fff}
+.mic-btn.disabled{background:var(--fill);border-color:var(--line);color:var(--muted);cursor:default}
+.dot-pulse{width:7px;height:7px;border-radius:50%;background:currentColor;animation:pulse 1.1s infinite}
+@keyframes pulse{0%{opacity:1;transform:scale(.75)}50%{opacity:.3;transform:scale(1.45)}100%{opacity:1;transform:scale(.75)}}
+.sr-hint{font-size:12px;color:var(--brand-dark);margin-top:6px;min-height:17px;line-height:1.4}
+.sr-hint.warn{color:var(--muted)}
+
+/* ---------- 配色选择 ---------- */
+.swatches{display:flex;gap:10px}
+.swatch{width:30px;height:30px;border-radius:50%;border:2px solid transparent;cursor:pointer;padding:0;box-shadow:0 0 0 2px #fff inset}
+.swatch.on{border-color:var(--brand)}
+.swatch.pat{border-radius:9px;background-color:var(--card);background-repeat:repeat;box-shadow:none;border:1px solid var(--line)}
+.swatch.pat.on{border-color:var(--brand);border-width:2px}
+#patSei{background-image:var(--pat-seigaiha);background-size:20px 10px}
+#patIchi{background-image:var(--pat-ichimatsu);background-size:12px 12px}
+#patAsa{background-image:var(--pat-asanoha);background-size:15px 26px}
+.slider{width:130px;accent-color:var(--brand)}
+
+/* ---------- toast ---------- */
+.toast{
+  position:fixed;left:50%;bottom:96px;transform:translateX(-50%) translateY(10px);
+  background:rgba(30,35,32,.92);color:#fff;padding:10px 18px;border-radius:999px;
+  font-size:13.5px;z-index:90;opacity:0;pointer-events:none;transition:all .24s ease;
+  max-width:80vw;text-align:center;
+}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+/* ---------- 存储不可用警告 ---------- */
+.storage-warn{
+  position:relative;z-index:99;background:var(--danger);color:#fff;
+  font-size:12.5px;line-height:1.6;padding:10px 14px;text-align:center;
+}
+.storage-warn b{font-weight:600}
+
+/* ---------- 安装到桌面提示 ---------- */
+.install-hint{
+  position:fixed;left:50%;transform:translateX(-50%);
+  bottom:calc(74px + env(safe-area-inset-bottom));
+  z-index:120;max-width:calc(100% - 26px);width:max-content;
+  display:flex;align-items:center;gap:10px;
+  background:rgba(40,32,30,.93);color:#fff;border-radius:15px;
+  padding:10px 12px;font-size:12.5px;line-height:1.45;
+  box-shadow:0 10px 26px rgba(0,0,0,.22);
+  backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);
+  animation:ihIn .35s ease both;
+}
+@keyframes ihIn{from{opacity:0;transform:translateX(-50%) translateY(8px)}to{opacity:1;transform:translateX(-50%) translateY(0)}}
+.install-hint em{font-style:normal;flex:1}
+.install-hint button{
+  flex:0 0 auto;border:0;border-radius:10px;padding:6px 11px;
+  background:rgba(255,255,255,.20);color:#fff;font-size:12px;
+  font-family:inherit;cursor:pointer;
+}
+
+/* ---------- 平板（安卓平板 / MatePad）适配 ---------- */
+@media (min-width:700px){
+  .app,.layer,.tabbar{max-width:640px}
+  .sheet{max-width:640px}
+  .page{padding:18px 24px 26px}
+  .card{padding:20px 22px}
+  .clock{font-size:52px}
+  .tab{font-size:12px;padding:11px 0 10px}
+  .tab svg{width:24px;height:24px}
+}
+
+/* 平板横屏：两栏，不再缩成窄条 */
+@media (min-width:900px){
+  .app,.layer,.tabbar{max-width:940px}
+  .sheet{max-width:720px}
+  .page{padding:20px 26px 30px}
+  .ring{width:270px;height:270px}
+  .clock{font-size:58px}
+
+  #page-practice.active{
+    display:grid;grid-template-columns:minmax(300px,380px) 1fr;
+    column-gap:14px;row-gap:0;align-items:start;
+  }
+  #page-practice.active > .card:nth-child(1){grid-column:1;grid-row:1 / span 2}
+  #page-practice.active > .card:nth-child(2){grid-column:2}
+  #page-practice.active > .card:nth-child(3){grid-column:2}
+
+  #page-calendar.active{
+    display:grid;grid-template-columns:1fr 1fr;column-gap:14px;row-gap:0;align-items:start;
+  }
+  #page-calendar.active > .stats{grid-column:1}
+  #page-calendar.active > .card:nth-child(2){grid-column:1}
+  #page-calendar.active > .card:nth-child(3){grid-column:2;grid-row:1 / span 2}
+
+  #page-pieces.active{
+    display:grid;grid-template-columns:1fr minmax(260px,330px);
+    column-gap:14px;row-gap:0;align-items:start;
+  }
+  #page-settings.active{
+    display:grid;grid-template-columns:1fr 1fr;column-gap:14px;align-items:start;
+  }
+}
+@media (min-width:1200px){
+  .app,.layer,.tabbar{max-width:1080px}
+  .page{padding:22px 30px 34px}
+  .ring{width:300px;height:300px}
+  .clock{font-size:64px}
+}
+</style>
+</head>
+<body>
+<div class="app">
+  <div class="layer" id="appBg"></div>
+  <div class="layer" id="appPattern" data-p="seigaiha"></div>
+
+  <div class="topbar">
+    <h1 id="pageTitle">练琴打卡</h1>
+    <div class="streak-badge">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2s4 4.5 4 8a4 4 0 0 1-8 0c0-1 .4-2 .4-2S6 10 6 13.5A6 6 0 0 0 18 14c0-5-6-12-6-12z"/></svg>
+      <span id="topStreak">连续 0 天</span>
+    </div>
+  </div>
+
+  <!-- 练习页 -->
+  <section class="page active" id="page-practice">
+    <div class="card">
+      <div class="timer-wrap">
+        <div class="ring">
+          <svg width="230" height="230" viewBox="0 0 230 230">
+            <defs>
+              <linearGradient id="ringGrad" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stop-color="#e2622c"/>
+                <stop offset="52%" stop-color="#c1272d"/>
+                <stop offset="100%" stop-color="#7d1518"/>
+              </linearGradient>
+            </defs>
+            <circle class="track" cx="115" cy="115" r="98"></circle>
+            <circle class="bar" id="ringBar" cx="115" cy="115" r="98" stroke-dasharray="615.75" stroke-dashoffset="615.75"></circle>
+          </svg>
+          <div class="ring-center">
+            <div class="clock" id="clock">00:00:00</div>
+            <div class="clock-piece" id="clockPiece">未选择曲目</div>
+            <div class="clock-sub" id="clockSub">今日目标 30 分钟</div>
+          </div>
+        </div>
+        <div class="btn-row">
+          <button class="btn btn-primary" id="btnStart">开始练习</button>
+          <button class="btn btn-ghost" id="btnPause" style="display:none">暂停</button>
+          <button class="btn btn-outline" id="btnFinish" style="display:none">结束并记录</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">
+        <span>选择曲目</span>
+        <span class="act" id="managePiece">管理</span>
+      </div>
+      <div class="chips" id="pieceChips"></div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">
+        <span>今日记录</span>
+        <span class="act" id="addRecord">补录</span>
+      </div>
+      <div id="todayList"></div>
+    </div>
+  </section>
+
+  <!-- 曲目页 -->
+  <section class="page" id="page-pieces">
+    <div class="card">
+      <div class="card-title">
+        <span>练习曲目 / 项目</span>
+        <span class="act" id="addPiece">添加</span>
+      </div>
+      <div id="pieceList"></div>
+    </div>
+    <div class="card">
+      <div class="card-title"><span>累计投入</span></div>
+      <div id="pieceStats"></div>
+    </div>
+  </section>
+
+  <!-- 日历页 -->
+  <section class="page" id="page-calendar">
+    <div class="stats" style="margin-bottom:12px">
+      <div class="stat hl"><div class="v" id="sStreak">0<small>天</small></div><div class="k" id="kStreak">连续打卡</div></div>
+      <div class="stat"><div class="v" id="sToday">0<small>分</small></div><div class="k" id="kToday">今日时长</div></div>
+      <div class="stat"><div class="v" id="sMonth">0<small>分</small></div><div class="k" id="kMonth">本月时长</div></div>
+      <div class="stat"><div class="v" id="sTotal">0<small>时</small></div><div class="k" id="kTotal">累计时长</div></div>
+    </div>
+
+    <div class="card">
+      <div class="cal-head">
+        <div class="cal-title" id="calTitle">2026年10月</div>
+        <div class="cal-nav">
+          <button id="calPrev" type="button">&lt;</button>
+          <button id="calNext" type="button">&gt;</button>
+        </div>
+      </div>
+      <div class="cal-grid" id="calDow"></div>
+      <div class="cal-grid" id="calGrid"></div>
+      <div class="legend">
+        <span>少</span>
+        <i style="background:var(--lv0)"></i>
+        <i style="background:var(--lv1)"></i>
+        <i style="background:var(--lv2)"></i>
+        <i style="background:var(--lv3)"></i>
+        <i style="background:var(--lv4)"></i>
+        <span>多</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">
+        <span id="dayTitle">今日明细</span>
+        <span class="act" id="dayAdd">补录</span>
+      </div>
+      <div id="dayList"></div>
+    </div>
+  </section>
+
+  <!-- 设置页 -->
+  <section class="page" id="page-settings">
+    <div class="card">
+      <div class="card-title"><span>练习设置</span></div>
+      <div class="row">
+        <div>
+          <div class="lbl">配色</div>
+          <div class="desc">蜜桃粉 / 薄荷绿 / 鬼灭之刃</div>
+        </div>
+        <div class="ctl">
+          <div class="swatches">
+            <button class="swatch" id="thPeach" type="button" title="蜜桃粉" style="background:linear-gradient(135deg,#fadfe6,#e0708c)"></button>
+            <button class="swatch" id="thMint" type="button" title="薄荷绿" style="background:linear-gradient(135deg,#dcf0ea,#2e9c86)"></button>
+            <button class="swatch on" id="thKimetsu" type="button" title="鬼灭之刃" style="background:linear-gradient(135deg,#f2b169,#c1272d)"></button>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div>
+          <div class="lbl">每日目标时长</div>
+          <div class="desc">进度环按此目标显示完成度</div>
+        </div>
+        <div class="ctl">
+          <div class="stepper">
+            <button type="button" id="goalMinus">−</button>
+            <span id="goalVal">30 分钟</span>
+            <button type="button" id="goalPlus">+</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title"><span>外观</span></div>
+      <div class="row">
+        <div>
+          <div class="lbl">内置插画</div>
+          <div class="desc" id="bgBuiltinState">和风少女与钢琴 · 已开启</div>
+        </div>
+        <div class="ctl">
+          <button class="mini-btn" id="btnBuiltinBg" type="button">关闭</button>
+        </div>
+      </div>
+      <div class="row">
+        <div>
+          <div class="lbl">背景图</div>
+          <div class="desc" id="bgState">未设置 · 图片只存本机，不上传</div>
+        </div>
+        <div class="ctl">
+          <button class="mini-btn" id="btnBgPick" type="button">选择</button>
+          <button class="mini-btn" id="btnBgClear" type="button">清除</button>
+        </div>
+      </div>
+      <div class="row">
+        <div>
+          <div class="lbl">背景浓度</div>
+          <div class="desc" id="bgOpacityVal">24%</div>
+        </div>
+        <div class="ctl"><input class="slider" type="range" id="bgOpacity" min="5" max="70" step="5" value="24"></div>
+      </div>
+      <div class="row">
+        <div>
+          <div class="lbl">和风底纹</div>
+          <div class="desc">青海波 / 市松纹 / 麻叶纹</div>
+        </div>
+        <div class="ctl">
+          <div class="swatches">
+            <button class="swatch pat" id="patNone" data-pat="none" type="button" title="无"></button>
+            <button class="swatch pat" id="patSei" data-pat="seigaiha" type="button" title="青海波"></button>
+            <button class="swatch pat" id="patIchi" data-pat="ichimatsu" type="button" title="市松纹"></button>
+            <button class="swatch pat" id="patAsa" data-pat="asanoha" type="button" title="麻叶纹"></button>
+          </div>
+        </div>
+      </div>
+      <input type="file" id="bgInput" accept="image/*" style="display:none">
+    </div>
+
+    <div class="card">
+      <div class="card-title"><span>数据管理</span></div>
+      <div class="row">
+        <div>
+          <div class="lbl">导出备份</div>
+          <div class="desc">保存为 JSON 文件，换机时可恢复</div>
+        </div>
+        <div class="ctl"><button class="mini-btn" id="btnExport" type="button">导出</button></div>
+      </div>
+      <div class="row">
+        <div>
+          <div class="lbl">导入备份</div>
+          <div class="desc">将覆盖当前设备上的数据</div>
+        </div>
+        <div class="ctl"><button class="mini-btn" id="btnImport" type="button">导入</button></div>
+      </div>
+      <div class="row">
+        <div>
+          <div class="lbl">清空全部数据</div>
+          <div class="desc">删除所有曲目与练习记录</div>
+        </div>
+        <div class="ctl"><button class="mini-btn danger" id="btnClear" type="button">清空</button></div>
+      </div>
+      <input type="file" id="fileInput" accept="application/json,.json" style="display:none">
+    </div>
+
+    <div class="card">
+      <div class="card-title"><span>关于</span></div>
+      <div class="about">
+        数据保存在<b>本设备浏览器</b>中，不上传服务器，也不做账号同步。<br>
+        安卓 / 华为平板：用<b>浏览器</b>打开本文件（不要用微信内置浏览器），菜单里<b>「添加到主屏幕」</b>即可像 App 一样打开。<br>
+        笔记的<b>语音输入</b>依赖浏览器自带引擎——安卓上若点了没反应，直接用<b>输入法的语音键盘</b>（讯飞、百度、搜狗键盘上的麦克风）说话，同样能写进笔记，这个方式更稳。<br>
+        换设备、清理浏览器数据前，务必先<b>导出备份</b>。
+      </div>
+    </div>
+  </section>
+
+  <nav class="tabbar">
+    <button class="tab on" data-tab="practice" type="button">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+      <span>练习</span>
+    </button>
+    <button class="tab" data-tab="pieces" type="button">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
+      <span>曲目</span>
+    </button>
+    <button class="tab" data-tab="calendar" type="button">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="17" rx="3"/><path d="M3 9h18M8 2v4M16 2v4"/></svg>
+      <span>打卡</span>
+    </button>
+    <button class="tab" data-tab="settings" type="button">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.6 1.6 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.6 1.6 0 0 0-1.8-.3 1.6 1.6 0 0 0-1 1.5v.2a2 2 0 1 1-4 0v-.1a1.6 1.6 0 0 0-1-1.5 1.6 1.6 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.6 1.6 0 0 0 .3-1.8 1.6 1.6 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.6 1.6 0 0 0 1.5-1 1.6 1.6 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.6 1.6 0 0 0 1.8.3h.1a1.6 1.6 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.6 1.6 0 0 0 1 1.5 1.6 1.6 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.6 1.6 0 0 0-.3 1.8v.1a1.6 1.6 0 0 0 1.5 1h.2a2 2 0 1 1 0 4h-.1a1.6 1.6 0 0 0-1.5 1z"/></svg>
+      <span>设置</span>
+    </button>
+  </nav>
+</div>
+
+<div class="mask" id="mask"><div class="sheet" id="sheet"></div></div>
+<div class="toast" id="toast"></div>
+
+<script>
+(function(){
+  'use strict';
+
+  /* ============ 存储 ============ */
+  var KEY = 'piano-practice-v1';
+  var DB = null;
+
+  function blank(){
+    return { version:1, pieces:[], sessions:[], settings:{ dailyGoalMin:30 }, timer:null };
+  }
+  function load(){
+    try{
+      var raw = localStorage.getItem(KEY);
+      if(!raw) return blank();
+      var d = JSON.parse(raw);
+      if(!d || typeof d !== 'object') return blank();
+      d.pieces = Array.isArray(d.pieces) ? d.pieces : [];
+      d.sessions = Array.isArray(d.sessions) ? d.sessions : [];
+      d.settings = d.settings && typeof d.settings === 'object' ? d.settings : {};
+      if(typeof d.settings.dailyGoalMin !== 'number') d.settings.dailyGoalMin = 30;
+      d.timer = d.timer || null;
+      return d;
+    }catch(e){ return blank(); }
+  }
+  function save(){
+    try{ localStorage.setItem(KEY, JSON.stringify(DB)); }
+    catch(e){ toast('保存失败，存储空间可能已满'); }
+  }
+
+  /* ============ 工具 ============ */
+  function pad(n){ return n < 10 ? '0' + n : '' + n; }
+  function ymd(d){ return d.getFullYear() + '-' + pad(d.getMonth()+1) + '-' + pad(d.getDate()); }
+  function parseYmd(s){ var p = String(s).split('-'); return new Date(+p[0], +p[1]-1, +p[2]); }
+  function uid(){ return Date.now().toString(36) + Math.random().toString(36).slice(2,7); }
+  function todayStr(){ return ymd(new Date()); }
+  function fmtClock(ms){
+    var t = Math.max(0, Math.floor(ms/1000));
+    var h = Math.floor(t/3600), m = Math.floor((t%3600)/60), s = t%60;
+    return pad(h) + ':' + pad(m) + ':' + pad(s);
+  }
+  function fmtMin(min){
+    min = Math.round(min);
+    if(min < 60) return min + ' 分钟';
+    var h = Math.floor(min/60), m = min%60;
+    return m ? h + ' 小时 ' + m + ' 分' : h + ' 小时';
+  }
+  function fmtSec(sec){
+    if(sec < 60) return sec + ' 秒';
+    return fmtMin(sec/60);
+  }
+  function hhmm(ts){
+    var d = new Date(ts);
+    return pad(d.getHours()) + ':' + pad(d.getMinutes());
+  }
+  function esc(s){
+    return String(s == null ? '' : s).replace(/[&<>"']/g, function(c){
+      return ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[c];
+    });
+  }
+  function $(id){ return document.getElementById(id); }
+
+  var toastTimer = null;
+  function toast(msg){
+    var t = $('toast');
+    t.textContent = msg;
+    t.classList.add('show');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(function(){ t.classList.remove('show'); }, 2000);
+  }
+
+  /* ============ 统计 ============ */
+  function sessionsOfDate(date){ return DB.sessions.filter(function(s){ return s.date === date; }); }
+  function minutesOfDate(date){
+    return sessionsOfDate(date).reduce(function(a,s){ return a + (s.sec||0); }, 0) / 60;
+  }
+  function minutesOfMonth(y, m){
+    var pre = y + '-' + pad(m+1);
+    return DB.sessions.reduce(function(a,s){
+      return a + (String(s.date).indexOf(pre) === 0 ? (s.sec||0) : 0);
+    }, 0) / 60;
+  }
+  function totalSec(){
+    return DB.sessions.reduce(function(a,s){ return a + (s.sec||0); }, 0);
+  }
+  function streakDays(){
+    var set = {};
+    DB.sessions.forEach(function(s){ set[s.date] = true; });
+    var d = new Date(); d.setHours(0,0,0,0);
+    if(!set[ymd(d)]) d.setDate(d.getDate()-1);
+    var n = 0;
+    while(set[ymd(d)]){ n++; d.setDate(d.getDate()-1); }
+    return n;
+  }
+  function practiceDays(){
+    var set = {};
+    DB.sessions.forEach(function(s){ set[s.date] = true; });
+    return Object.keys(set).length;
+  }
+  function pieceName(id){
+    if(!id) return '自由练习';
+    for(var i=0;i<DB.pieces.length;i++) if(DB.pieces[i].id === id) return DB.pieces[i].name;
+    return '已删除曲目';
+  }
+  function statOfPiece(id){
+    var sec = 0, cnt = 0, last = 0;
+    DB.sessions.forEach(function(s){
+      if(s.pieceId === id){
+        sec += (s.sec||0); cnt++;
+        if(s.endTs && s.endTs > last) last = s.endTs;
+      }
+    });
+    return { sec:sec, count:cnt, last:last };
+  }
+
+  /* ============ 计时器 ============ */
+  var T = { state:'idle', pieceId:null, baseMs:0, startedAt:0 };
+  var tickTimer = null;
+
+  function timerMs(){
+    return T.baseMs + (T.state === 'running' ? (Date.now() - T.startedAt) : 0);
+  }
+  function restoreTimer(){
+    var t = DB.timer;
+    if(t && (t.state === 'running' || t.state === 'paused')){
+      T.state = t.state; T.pieceId = t.pieceId || null;
+      T.baseMs = t.baseMs || 0; T.startedAt = t.startedAt || Date.now();
+      if(T.state === 'running' && Date.now() - T.startedAt > 12*3600*1000){
+        T.state = 'paused'; T.baseMs = 0;
+      }
+    }
+  }
+  function persistTimer(){
+    DB.timer = (T.state === 'idle') ? null : {
+      state:T.state, pieceId:T.pieceId, baseMs:T.baseMs, startedAt:T.startedAt
+    };
+    save();
+  }
+  function startTick(){
+    stopTick();
+    tickTimer = setInterval(paintTimer, 250);
+  }
+  function stopTick(){ if(tickTimer){ clearInterval(tickTimer); tickTimer = null; } }
+
+  function paintTimer(){
+    var ms = timerMs();
+    $('clock').textContent = fmtClock(ms);
+    var goal = DB.settings.dailyGoalMin || 30;
+    var todayMin = minutesOfDate(todayStr()) + (T.state === 'idle' ? 0 : ms/60000);
+    var ratio = goal > 0 ? Math.min(1, todayMin / goal) : 0;
+    var C = 2 * Math.PI * 98;
+    $('ringBar').setAttribute('stroke-dasharray', C.toFixed(2));
+    $('ringBar').setAttribute('stroke-dashoffset', (C * (1 - ratio)).toFixed(2));
+    $('clockSub').textContent = '今日 ' + fmtSec(Math.round(todayMin*60)) + ' · 目标 ' + goal + ' 分钟';
+    $('clockPiece').textContent = T.pieceId ? pieceName(T.pieceId) : (curPieceId ? pieceName(curPieceId) : '未选择曲目');
+
+    var b1 = $('btnStart'), b2 = $('btnPause'), b3 = $('btnFinish');
+    if(T.state === 'idle'){
+      b1.style.display = ''; b1.textContent = '开始练习'; b1.disabled = false;
+      b2.style.display = 'none'; b3.style.display = 'none';
+    }else if(T.state === 'running'){
+      b1.style.display = 'none';
+      b2.style.display = ''; b2.textContent = '暂停';
+      b3.style.display = ''; b3.textContent = '结束并记录';
+    }else{
+      b1.style.display = 'none';
+      b2.style.display = ''; b2.textContent = '继续';
+      b3.style.display = ''; b3.textContent = '结束并记录';
+    }
+  }
+
+  var curPieceId = null; // 当前选中的曲目（计时器未运行时用于待选）
+
+  function startTimer(){
+    if(T.state !== 'idle') return;
+    T.state = 'running';
+    T.pieceId = curPieceId;
+    T.baseMs = 0;
+    T.startedAt = Date.now();
+    persistTimer(); startTick(); paintTimer();
+    renderChips();
+  }
+  function pauseTimer(){
+    if(T.state === 'running'){ T.baseMs = timerMs(); T.state = 'paused'; }
+    else if(T.state === 'paused'){ T.startedAt = Date.now(); T.state = 'running'; startTick(); }
+    else return;
+    persistTimer(); paintTimer();
+  }
+  function finishTimer(){
+    if(T.state === 'idle') return;
+    var sec = Math.round(timerMs()/1000);
+    if(T.state === 'running'){ T.baseMs = timerMs(); }
+    T.state = 'idle';
+    stopTick();
+    DB.timer = null; save();
+    if(sec < 1){ toast('时间太短，未记录'); paintTimer(); renderAll(); return; }
+    openSessionModal(null, {
+      pieceId: T.pieceId,
+      sec: sec,
+      date: todayStr(),
+      fromTimer: true
+    });
+    T.baseMs = 0; T.pieceId = null;
+    paintTimer();
+  }
+
+  /* ============ 渲染 ============ */
+  function renderAll(){
+    renderChips();
+    renderToday();
+    renderPieces();
+    renderCalendar();
+    renderStats();
+    paintTimer();
+    applyTheme();
+    applyBg();
+    applyPattern();
+    var n = streakDays();
+    $('topStreak').textContent = (themeName() === 'kimetsu')
+      ? ('全集中 ' + n + ' 日') : ('连续 ' + n + ' 天');
+    $('goalVal').textContent = DB.settings.dailyGoalMin + ' 分钟';
+  }
+
+  function themeName(){
+    var t = DB.settings.theme;
+    return (t === 'mint' || t === 'peach' || t === 'kimetsu') ? t : 'kimetsu';
+  }
+  function applyTheme(){
+    var t = themeName();
+    document.documentElement.setAttribute('data-theme', t);
+    $('thPeach').classList.toggle('on', t === 'peach');
+    $('thMint').classList.toggle('on', t === 'mint');
+    $('thKimetsu').classList.toggle('on', t === 'kimetsu');
+    var meta = document.querySelector('meta[name="theme-color"]');
+    var c = t === 'mint' ? '#2e9c86' : (t === 'kimetsu' ? '#c1272d' : '#e0708c');
+    if(meta) meta.setAttribute('content', c);
+    var km = (t === 'kimetsu');
+    $('kStreak').textContent = km ? '全集中天数' : '连续打卡';
+    $('kToday').textContent = km ? '今日修行' : '今日时长';
+    $('kMonth').textContent = km ? '本月修行' : '本月时长';
+    $('kTotal').textContent = km ? '累计修行' : '累计时长';
+    buildIcon();
+  }
+
+  /* ---- 背景图（只存本机） ---- */
+  var BGKEY = 'piano-practice-bg';
+  var BUILTIN_BG = 'assets/bg-illustration.jpg';
+
+  function builtinBgOn(){
+    return DB.settings.bgBuiltin !== false;
+  }
+
+  function applyBg(){
+    var custom = '';
+    try{ custom = localStorage.getItem(BGKEY) || ''; }catch(e){}
+    var on = builtinBgOn();
+    var src = custom || (on ? BUILTIN_BG : '');
+    var el = $('appBg');
+    el.style.backgroundImage = src ? ('url("' + src + '")') : 'none';
+    var op = (typeof DB.settings.bgOpacity === 'number') ? DB.settings.bgOpacity : 24;
+    el.style.opacity = (op/100).toFixed(2);
+    $('bgOpacity').value = op;
+    $('bgOpacityVal').textContent = op + '%';
+    $('btnBuiltinBg').textContent = on ? '关闭' : '开启';
+    $('bgBuiltinState').textContent = !on
+      ? '已关闭'
+      : (custom ? '已开启 · 当前显示你的自定义图' : '和风少女与钢琴 · 已开启');
+    $('bgState').textContent = custom
+      ? '已设置 · 只存本机，不上传'
+      : (on ? '未设置 · 可另选一张覆盖插画' : '未设置 · 图片只存本机，不上传');
+  }
+
+  function applyPattern(){
+    var p = DB.settings.pattern || 'seigaiha';
+    $('appPattern').setAttribute('data-p', p);
+    var map = { patNone:'none', patSei:'seigaiha', patIchi:'ichimatsu', patAsa:'asanoha' };
+    Object.keys(map).forEach(function(id){
+      $(id).classList.toggle('on', map[id] === p);
+    });
+  }
+
+  function compressImage(file, cb){
+    try{
+      var fr = new FileReader();
+      fr.onload = function(){
+        var img = new Image();
+        img.onload = function(){
+          var max = 1000;
+          var w = img.width, h = img.height;
+          var sc = Math.min(1, max / Math.max(w, h));
+          var cv = document.createElement('canvas');
+          cv.width = Math.max(1, Math.round(w*sc));
+          cv.height = Math.max(1, Math.round(h*sc));
+          var c = cv.getContext('2d');
+          if(!c){ cb(null); return; }
+          c.drawImage(img, 0, 0, cv.width, cv.height);
+          try{ cb(cv.toDataURL('image/jpeg', 0.82)); }catch(e){ cb(null); }
+        };
+        img.onerror = function(){ cb(null); };
+        img.src = fr.result;
+      };
+      fr.onerror = function(){ cb(null); };
+      fr.readAsDataURL(file);
+    }catch(e){ cb(null); }
+  }
+
+  /* ---- 生成 App 图标（市松纹 + 琴键，canvas 绘制，无外部素材） ---- */
+  function roundRectPath(c, x, y, w, h, r){
+    c.beginPath();
+    c.moveTo(x+r, y); c.lineTo(x+w-r, y); c.quadraticCurveTo(x+w, y, x+w, y+r);
+    c.lineTo(x+w, y+h-r); c.quadraticCurveTo(x+w, y+h, x+w-r, y+h);
+    c.lineTo(x+r, y+h); c.quadraticCurveTo(x, y+h, x, y+h-r);
+    c.lineTo(x, y+r); c.quadraticCurveTo(x, y, x+r, y);
+    c.closePath();
+  }
+  function setIconLink(rel, url){
+    var l = document.querySelector('link[rel="' + rel + '"][data-dyn]');
+    if(!l){
+      l = document.createElement('link');
+      l.setAttribute('rel', rel);
+      l.setAttribute('data-dyn', '1');
+      document.head.appendChild(l);
+    }
+    l.setAttribute('href', url);
+  }
+  function buildIcon(){
+    try{
+      // 默认主题直接使用打包好的图标文件，保证桌面图标清晰一致
+      if(themeName() === 'kimetsu'){
+        setIconLink('apple-touch-icon', 'assets/apple-touch-icon.png');
+        setIconLink('icon', 'assets/icon-192.png');
+        return;
+      }
+      var s = 180;
+      var cv = document.createElement('canvas');
+      cv.width = s; cv.height = s;
+      var c = cv.getContext('2d');
+      if(!c) return;
+      var t = themeName();
+      c.fillStyle = (t === 'mint') ? '#2e9c86' : (t === 'peach' ? '#e0708c' : '#c1272d');
+      roundRectPath(c, 0, 0, s, s, 40); c.fill();
+      var cx = s/2, cy = s*0.44, r = 46;
+      c.save();
+      c.beginPath(); c.arc(cx, cy, r, 0, Math.PI*2); c.clip();
+      c.fillStyle = '#2b4034'; c.fillRect(cx-r, cy-r, r, r); c.fillRect(cx, cy, r, r);
+      c.fillStyle = '#121c16'; c.fillRect(cx, cy-r, r, r); c.fillRect(cx-r, cy, r, r);
+      c.restore();
+      c.beginPath(); c.arc(cx, cy, r, 0, Math.PI*2);
+      c.strokeStyle = '#fff'; c.lineWidth = 6; c.stroke();
+      var kw = 26, kh = 32, y0 = s - 44, x0 = (s - kw*3)/2;
+      for(var i=0;i<3;i++){ c.fillStyle = '#fff'; c.fillRect(x0 + i*kw, y0, kw-2, kh); }
+      c.fillStyle = '#211d1a';
+      c.fillRect(x0 + kw - 7, y0, 12, 19);
+      c.fillRect(x0 + 2*kw - 7, y0, 12, 19);
+      var url = cv.toDataURL('image/png');
+      setIconLink('apple-touch-icon', url);
+      setIconLink('icon', url);
+    }catch(e){}
+  }
+
+  function renderChips(){
+    var box = $('pieceChips');
+    var html = '';
+    var activeId = (T.state === 'idle') ? curPieceId : T.pieceId;
+    html += '<div class="chip' + (activeId === null ? ' on' : '') + '" data-piece="">自由练习</div>';
+    DB.pieces.forEach(function(p){
+      html += '<div class="chip' + (activeId === p.id ? ' on' : '') + '" data-piece="' + p.id + '">' + esc(p.name) + '</div>';
+    });
+    html += '<div class="chip add" data-piece="__add">+ 新曲目</div>';
+    box.innerHTML = html;
+    Array.prototype.forEach.call(box.querySelectorAll('.chip'), function(el){
+      el.addEventListener('click', function(){
+        var v = el.getAttribute('data-piece');
+        if(v === '__add'){ openPieceModal(null); return; }
+        curPieceId = v === '' ? null : v;
+        if(T.state === 'idle'){ T.pieceId = curPieceId; persistTimer(); }
+        renderChips(); paintTimer();
+      });
+    });
+  }
+
+  function recItem(s, showDate){
+    var name = pieceName(s.pieceId);
+    var meta = (showDate ? s.date + ' ' : '') + hhmm(s.endTs || s.startTs || Date.now());
+    return '<div class="rec" data-id="' + s.id + '">' +
+      '<div class="rec-dot"></div>' +
+      '<div class="rec-main">' +
+        '<div class="rec-top"><div class="rec-name">' + esc(name) + '</div>' +
+        '<div class="rec-dur">' + fmtSec(s.sec) + '</div></div>' +
+        '<div class="rec-meta">' + esc(meta) + '</div>' +
+        (s.note ? '<div class="rec-note">' + esc(s.note) + '</div>' : '') +
+      '</div></div>';
+  }
+  function bindRecList(container){
+    Array.prototype.forEach.call(container.querySelectorAll('.rec'), function(el){
+      el.addEventListener('click', function(){
+        var id = el.getAttribute('data-id');
+        var s = null;
+        DB.sessions.forEach(function(x){ if(x.id === id) s = x; });
+        if(s) openSessionModal(s, null);
+      });
+    });
+  }
+
+  function renderToday(){
+    var list = sessionsOfDate(todayStr()).sort(function(a,b){ return (b.endTs||0)-(a.endTs||0); });
+    var box = $('todayList');
+    if(!list.length){
+      box.innerHTML = (themeName() === 'kimetsu')
+        ? '<div class="empty">今日尚未修行<br>点上面的「开始练习」计时，或「补录」手动添加</div>'
+        : '<div class="empty">今天还没有练习记录<br>点上面的「开始练习」计时，或「补录」手动添加</div>';
+      return;
+    }
+    box.innerHTML = list.map(function(s){ return recItem(s, false); }).join('');
+    bindRecList(box);
+  }
+
+  function renderPieces(){
+    var box = $('pieceList');
+    if(!DB.pieces.length){
+      box.innerHTML = '<div class="empty">还没有曲目<br>点右上角「添加」，把正在练的曲子加进来</div>';
+    }else{
+      var sorted = DB.pieces.slice().sort(function(a,b){ return (statOfPiece(b.id).sec - statOfPiece(a.id).sec); });
+      box.innerHTML = sorted.map(function(p){
+        var st = statOfPiece(p.id);
+        var goal = p.goalMin || 0;
+        var pct = goal > 0 ? Math.min(100, (st.sec/60) / goal * 100) : 0;
+        return '<div class="piece">' +
+          '<div class="piece-main" data-edit="' + p.id + '">' +
+            '<div class="piece-name">' + esc(p.name) + '</div>' +
+            '<div class="piece-meta">' +
+              (p.category ? '<span class="tag">' + esc(p.category) + '</span>' : '') +
+              '累计 ' + fmtSec(st.sec) + ' · ' + st.count + ' 次' +
+              (st.last ? ' · 最近 ' + ymd(new Date(st.last)).slice(5) : '') +
+            '</div>' +
+            (goal > 0 ? '<div class="bar-mini"><i style="width:' + pct.toFixed(1) + '%"></i></div><div class="piece-meta" style="margin-top:3px">目标 ' + goal + ' 分钟（' + Math.round(pct) + '%）</div>' : '') +
+          '</div>' +
+          '<div class="piece-edit" data-edit="' + p.id + '">编辑</div>' +
+        '</div>';
+      }).join('');
+      Array.prototype.forEach.call(box.querySelectorAll('[data-edit]'), function(el){
+        el.addEventListener('click', function(){
+          var id = el.getAttribute('data-edit');
+          var p = null;
+          DB.pieces.forEach(function(x){ if(x.id === id) p = x; });
+          if(p) openPieceModal(p);
+        });
+      });
+    }
+
+    var total = totalSec();
+    var days = practiceDays();
+    $('pieceStats').innerHTML =
+      '<div class="row"><div><div class="lbl">累计练习时长</div></div><div class="ctl"><b>' + fmtMin(total/60) + '</b></div></div>' +
+      '<div class="row"><div><div class="lbl">练习次数</div></div><div class="ctl"><b>' + DB.sessions.length + ' 次</b></div></div>' +
+      '<div class="row"><div><div class="lbl">打卡天数</div></div><div class="ctl"><b>' + days + ' 天</b></div></div>' +
+      '<div class="row"><div><div class="lbl">平均每次</div></div><div class="ctl"><b>' + (DB.sessions.length ? fmtMin(total/60/DB.sessions.length) : '—') + '</b></div></div>';
+  }
+
+  /* ---- 日历 ---- */
+  var calYear, calMonth, selDate = todayStr();
+
+  function renderStats(){
+    $('sStreak').innerHTML = streakDays() + '<small>天</small>';
+    $('sToday').innerHTML = Math.round(minutesOfDate(todayStr())) + '<small>分</small>';
+    $('sMonth').innerHTML = Math.round(minutesOfMonth(calYear, calMonth)) + '<small>分</small>';
+    var h = totalSec()/3600;
+    $('sTotal').innerHTML = (h < 10 ? h.toFixed(1) : Math.round(h)) + '<small>时</small>';
+  }
+
+  function renderCalendar(){
+    if(typeof calYear !== 'number'){
+      var n = new Date(); calYear = n.getFullYear(); calMonth = n.getMonth();
+    }
+    $('calTitle').textContent = calYear + '年' + (calMonth+1) + '月';
+    var dows = ['一','二','三','四','五','六','日'];
+    $('calDow').innerHTML = dows.map(function(d){ return '<div class="cal-dow">' + d + '</div>'; }).join('');
+
+    var first = new Date(calYear, calMonth, 1);
+    var lead = (first.getDay() + 6) % 7;
+    var days = new Date(calYear, calMonth+1, 0).getDate();
+    var today = todayStr();
+    var goal = DB.settings.dailyGoalMin || 30;
+    var html = '';
+    for(var i=0;i<lead;i++) html += '<div class="day blank"></div>';
+    for(var d=1; d<=days; d++){
+      var dateStr = calYear + '-' + pad(calMonth+1) + '-' + pad(d);
+      var min = minutesOfDate(dateStr);
+      var lv = 0;
+      if(min > 0){
+        var r = min / goal;
+        lv = r < 0.34 ? 1 : (r < 0.67 ? 2 : (r < 1 ? 3 : 4));
+      }
+      var cls = 'day' + (lv ? ' lv' + lv : '') + (dateStr === today ? ' today' : '') + (dateStr === selDate ? ' sel' : '');
+      html += '<div class="' + cls + '" data-date="' + dateStr + '">' + d +
+        (min > 0 ? '<span class="m">' + Math.round(min) + '</span>' : '') + '</div>';
+    }
+    $('calGrid').innerHTML = html;
+    Array.prototype.forEach.call($('calGrid').querySelectorAll('.day[data-date]'), function(el){
+      el.addEventListener('click', function(){
+        selDate = el.getAttribute('data-date');
+        renderCalendar(); renderDayList();
+      });
+    });
+    renderDayList();
+  }
+
+  function renderDayList(){
+    var list = sessionsOfDate(selDate).sort(function(a,b){ return (a.endTs||0)-(b.endTs||0); });
+    var box = $('dayList');
+    var label = selDate === todayStr() ? '今日明细' : (selDate.slice(5).replace('-','月') + '日明细');
+    $('dayTitle').textContent = label + (list.length ? '（' + fmtSec(list.reduce(function(a,s){return a+s.sec;},0)) + '）' : '');
+    if(!list.length){
+      box.innerHTML = '<div class="empty">这一天没有记录</div>';
+      return;
+    }
+    box.innerHTML = list.map(function(s){ return recItem(s, false); }).join('');
+    bindRecList(box);
+  }
+
+  /* ============ 弹窗 ============ */
+  var activeStop = null; // 当前弹窗的清理函数（用于停止语音识别）
+  function openSheet(html){
+    $('sheet').innerHTML = html;
+    $('mask').classList.add('show');
+  }
+  function closeSheet(){
+    if(activeStop){ activeStop(); activeStop = null; }
+    $('mask').classList.remove('show');
+  }
+  $('mask').addEventListener('click', function(e){ if(e.target === $('mask')) closeSheet(); });
+
+  function pieceOptions(sel){
+    var html = '<option value="">自由练习（不指定曲目）</option>';
+    DB.pieces.forEach(function(p){
+      html += '<option value="' + p.id + '"' + (p.id === sel ? ' selected' : '') + '>' + esc(p.name) + '</option>';
+    });
+    return html;
+  }
+
+  function openSessionModal(s, preset){
+    var isNew = !s;
+    var data = s || {
+      id: uid(),
+      pieceId: preset && preset.pieceId ? preset.pieceId : (curPieceId || ''),
+      date: preset && preset.date ? preset.date : todayStr(),
+      sec: preset && preset.sec ? preset.sec : 30*60,
+      note: '',
+      endTs: Date.now(),
+      startTs: Date.now()
+    };
+    var mm = Math.floor((data.sec||0)/60);
+    var ss = (data.sec||0) % 60;
+    var html = '';
+    html += '<h3>' + (isNew ? '记录一次练习' : '编辑练习记录') + '</h3>';
+    if(preset && preset.fromTimer){
+      html += '<div class="hint">本次计时 ' + fmtSec(data.sec) + '，确认信息后保存。</div>';
+    }
+    html += '<div class="field"><label>曲目</label><select id="fPiece">' + pieceOptions(data.pieceId) + '</select></div>';
+    html += '<div class="field"><label>日期</label><input type="date" id="fDate" value="' + data.date + '"></div>';
+    html += '<div class="flex2">' +
+      '<div class="field"><label>时长（分）</label><input type="number" id="fMin" min="0" max="1440" step="1" value="' + mm + '"></div>' +
+      '<div class="field"><label>秒</label><input type="number" id="fSec" min="0" max="59" step="1" value="' + ss + '"></div>' +
+    '</div>';
+    html += '<div class="field">' +
+      '<label class="lbl-row"><span>练习笔记</span>' +
+      '<button type="button" class="mic-btn" id="fMic"></button></label>' +
+      '<textarea id="fNote" placeholder="今天练了什么？哪里有卡顿？下次要改什么？">' + esc(data.note || '') + '</textarea>' +
+      '<div class="sr-hint" id="fSrHint"></div>' +
+    '</div>';
+    html += '<div class="sheet-btns">' +
+      (isNew ? '' : '<button class="btn btn-danger" id="fDel" type="button">删除</button>') +
+      '<button class="btn btn-outline" id="fCancel" type="button">取消</button>' +
+      '<button class="btn btn-primary" id="fSave" type="button">保存</button>' +
+    '</div>';
+    if(isNew) html = html.replace('<button class="btn btn-danger" id="fDel" type="button">删除</button>', '');
+    openSheet(html);
+
+    /* ---- 语音输入（Web Speech API） ---- */
+    var ta = $('fNote');
+    var micBtn = $('fMic');
+    var srHint = $('fSrHint');
+    var SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+    var NATIVE = (typeof window.AndroidVoice !== 'undefined') && (function(){ try{ return window.AndroidVoice.available(); }catch(e){ return false; } })();
+    var isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
+    var MIC_SVG = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="2" width="6" height="12" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v4"/></svg>';
+    var recog = null, listening = false, baseText = '', restarts = 0;
+
+    function micIdle(){
+      micBtn.classList.remove('on');
+      micBtn.innerHTML = MIC_SVG + ' 语音输入';
+      srHint.textContent = '';
+      srHint.classList.remove('warn');
+    }
+    function micStop(){
+      listening = false;
+      if(NATIVE){ try{ window.AndroidVoice.stop(); }catch(e){} }
+      if(recog){ try{ recog.stop(); }catch(e){} }
+      if(ta.value) ta.value = ta.value.replace(/\s+$/, '');
+      micIdle();
+    }
+    activeStop = micStop;
+
+    /* App 内置原生语音识别（安卓安装包内使用） */
+    window.__ppVoice = {
+      partial: function(t){
+        if(!listening) return;
+        ta.value = baseText + t;
+        srHint.textContent = t || '请说话…';
+        ta.scrollTop = ta.scrollHeight;
+      },
+      final: function(t){
+        if(!listening) return;
+        baseText += t;
+        ta.value = baseText;
+        srHint.textContent = '已记录，可以继续说…';
+        ta.scrollTop = ta.scrollHeight;
+      },
+      error: function(code){
+        if(code === 'not-allowed'){
+          toast('麦克风权限被拒绝，请在系统设置里允许本应用录音');
+          micStop();
+        }else if(code === 'no-service'){
+          toast('手机未提供语音识别服务，请用输入法的语音键盘说话');
+          micStop();
+        }else{
+          if(listening) toast('语音识别中断，可再点一次麦克风');
+          micStop();
+        }
+      }
+    };
+
+    function micStart(){
+      baseText = ta.value.replace(/\s+$/, '');
+      if(baseText) baseText += ' ';
+      listening = true; restarts = 0;
+      micBtn.classList.add('on');
+      micBtn.innerHTML = '<i class="dot-pulse"></i> 聆听中，点击结束';
+      srHint.textContent = '请说话，说的内容会自动转成文字…';
+      srHint.classList.remove('warn');
+      if(NATIVE){
+        try{ window.AndroidVoice.start(); }catch(e){ toast('无法启动语音识别'); micStop(); }
+        return;
+      }
+      try{ recog = new SR(); }catch(e){ toast('无法启动语音识别'); return; }
+      recog.lang = 'zh-CN';
+      recog.continuous = !isIOS;
+      recog.interimResults = true;
+      baseText = ta.value.replace(/\s+$/, '');
+      if(baseText) baseText += ' ';
+      listening = true; restarts = 0;
+      micBtn.classList.add('on');
+      micBtn.innerHTML = '<i class="dot-pulse"></i> 聆听中，点击结束';
+      srHint.textContent = '请说话，说的内容会自动转成文字…';
+
+      recog.onresult = function(ev){
+        var interim = '';
+        for(var i = ev.resultIndex; i < ev.results.length; i++){
+          var res = ev.results[i];
+          if(res.isFinal){ baseText += res[0].transcript; }
+          else { interim += res[0].transcript; }
+        }
+        ta.value = baseText + interim;
+        srHint.textContent = interim ? interim : '已记录，可以继续说…';
+        ta.scrollTop = ta.scrollHeight;
+      };
+      recog.onerror = function(ev){
+        if(ev.error === 'not-allowed' || ev.error === 'service-not-allowed'){
+          toast('麦克风权限被拒绝，请在浏览器里允许使用麦克风');
+          micStop();
+        }else if(ev.error !== 'no-speech' && ev.error !== 'aborted'){
+          toast('语音识别出错：' + ev.error);
+          micStop();
+        }
+      };
+      recog.onend = function(){
+        if(listening && !isIOS && restarts < 6){
+          restarts++;
+          setTimeout(function(){
+            if(listening && recog){ try{ recog.start(); }catch(e){ micStop(); } }
+          }, 250);
+        }else{
+          micStop();
+        }
+      };
+      try{ recog.start(); }
+      catch(e){ toast('无法启动语音识别'); micStop(); }
+    }
+
+    if(!SR && !NATIVE){
+      micBtn.classList.add('disabled');
+      micBtn.innerHTML = MIC_SVG + ' 不支持语音';
+      micBtn.disabled = true;
+      srHint.classList.add('warn');
+      srHint.textContent = '当前浏览器不支持语音转文字，用 Chrome / Edge / Safari 打开可用（页面需为 HTTPS）。';
+    }else{
+      micIdle();
+      micBtn.addEventListener('click', function(){
+        if(listening){ micStop(); toast('已结束语音输入'); }
+        else { micStart(); }
+      });
+    }
+
+    $('fCancel').addEventListener('click', function(){ micStop(); closeSheet(); });
+    if(!isNew){
+      $('fDel').addEventListener('click', function(){
+        if(!confirm('确定删除这条练习记录？')) return;
+        DB.sessions = DB.sessions.filter(function(x){ return x.id !== data.id; });
+        save(); closeSheet(); renderAll(); toast('已删除');
+      });
+    }
+    $('fSave').addEventListener('click', function(){
+      if(listening) micStop();
+      var sec = (parseInt($('fMin').value,10) || 0) * 60 + (parseInt($('fSec').value,10) || 0);
+      if(sec <= 0){ toast('请填写练习时长'); return; }
+      var rec = {
+        id: data.id,
+        pieceId: $('fPiece').value || '',
+        date: $('fDate').value || todayStr(),
+        sec: sec,
+        note: $('fNote').value.trim(),
+        startTs: data.startTs || Date.now(),
+        endTs: data.endTs || Date.now()
+      };
+      if(isNew){ DB.sessions.push(rec); }
+      else{
+        DB.sessions = DB.sessions.map(function(x){ return x.id === rec.id ? rec : x; });
+      }
+      save(); closeSheet(); renderAll();
+      toast(isNew ? '已记录 ' + fmtSec(sec) : '已更新');
+    });
+  }
+
+  var CATS = ['音阶','练习曲','乐曲','视奏','乐理','其他'];
+  function openPieceModal(p){
+    var isNew = !p;
+    var data = p || { id: uid(), name:'', category:'乐曲', goalMin:0 };
+    var html = '';
+    html += '<h3>' + (isNew ? '添加曲目' : '编辑曲目') + '</h3>';
+    html += '<div class="field"><label>名称</label><input id="pName" type="text" placeholder="例如：车尔尼 599 No.12" value="' + esc(data.name) + '"></div>';
+    html += '<div class="field"><label>分类</label><select id="pCat">';
+    CATS.forEach(function(c){
+      html += '<option value="' + c + '"' + (c === data.category ? ' selected' : '') + '>' + c + '</option>';
+    });
+    html += '</select></div>';
+    html += '<div class="field"><label>累计目标时长（分钟，可留空）</label><input id="pGoal" type="number" min="0" step="10" value="' + (data.goalMin || '') + '" placeholder="例如 600"></div>';
+    html += '<div class="sheet-btns">' +
+      (isNew ? '' : '<button class="btn btn-danger" id="pDel" type="button">删除</button>') +
+      '<button class="btn btn-outline" id="pCancel" type="button">取消</button>' +
+      '<button class="btn btn-primary" id="pSave" type="button">保存</button>' +
+    '</div>';
+    openSheet(html);
+
+    $('pCancel').addEventListener('click', closeSheet);
+    if(!isNew){
+      $('pDel').addEventListener('click', function(){
+        var n = DB.sessions.filter(function(s){ return s.pieceId === data.id; }).length;
+        if(!confirm('删除「' + data.name + '」？' + (n ? '（其下 ' + n + ' 条练习记录会保留，但显示为「已删除曲目」）' : ''))) return;
+        DB.pieces = DB.pieces.filter(function(x){ return x.id !== data.id; });
+        save(); closeSheet(); renderAll(); toast('已删除曲目');
+      });
+    }
+    $('pSave').addEventListener('click', function(){
+      var name = $('pName').value.trim();
+      if(!name){ toast('请填写曲目名称'); return; }
+      var rec = {
+        id: data.id,
+        name: name,
+        category: $('pCat').value,
+        goalMin: parseInt($('pGoal').value,10) || 0,
+        createdAt: data.createdAt || Date.now()
+      };
+      if(isNew){ DB.pieces.push(rec); curPieceId = rec.id; }
+      else{ DB.pieces = DB.pieces.map(function(x){ return x.id === rec.id ? rec : x; }); }
+      save(); closeSheet(); renderAll();
+      toast(isNew ? '已添加曲目' : '已保存');
+    });
+    setTimeout(function(){ $('pName').focus(); }, 260);
+  }
+
+  /* ============ 交互绑定 ============ */
+  var TITLES = { practice:'练琴打卡', pieces:'曲目管理', calendar:'打卡日历', settings:'设置' };
+  function switchTab(name){
+    Array.prototype.forEach.call(document.querySelectorAll('.tab'), function(b){
+      b.classList.toggle('on', b.getAttribute('data-tab') === name);
+    });
+    Array.prototype.forEach.call(document.querySelectorAll('.page'), function(p){
+      p.classList.toggle('active', p.id === 'page-' + name);
+    });
+    $('pageTitle').textContent = TITLES[name] || '练琴打卡';
+    window.scrollTo(0,0);
+  }
+  Array.prototype.forEach.call(document.querySelectorAll('.tab'), function(b){
+    b.addEventListener('click', function(){ switchTab(b.getAttribute('data-tab')); });
+  });
+
+  $('btnStart').addEventListener('click', startTimer);
+  $('btnPause').addEventListener('click', pauseTimer);
+  $('btnFinish').addEventListener('click', finishTimer);
+
+  $('addRecord').addEventListener('click', function(){ openSessionModal(null, null); });
+  $('dayAdd').addEventListener('click', function(){ openSessionModal(null, { date: selDate }); });
+  $('managePiece').addEventListener('click', function(){ switchTab('pieces'); });
+  $('addPiece').addEventListener('click', function(){ openPieceModal(null); });
+
+  $('calPrev').addEventListener('click', function(){
+    calMonth--; if(calMonth < 0){ calMonth = 11; calYear--; }
+    renderCalendar(); renderStats();
+  });
+  $('calNext').addEventListener('click', function(){
+    calMonth++; if(calMonth > 11){ calMonth = 0; calYear++; }
+    renderCalendar(); renderStats();
+  });
+
+  $('goalMinus').addEventListener('click', function(){
+    DB.settings.dailyGoalMin = Math.max(5, (DB.settings.dailyGoalMin||30) - 5);
+    save(); renderAll();
+  });
+  $('goalPlus').addEventListener('click', function(){
+    DB.settings.dailyGoalMin = Math.min(600, (DB.settings.dailyGoalMin||30) + 5);
+    save(); renderAll();
+  });
+
+  $('thPeach').addEventListener('click', function(){
+    DB.settings.theme = 'peach'; save(); renderAll();
+  });
+  $('thMint').addEventListener('click', function(){
+    DB.settings.theme = 'mint'; save(); renderAll();
+  });
+  $('thKimetsu').addEventListener('click', function(){
+    DB.settings.theme = 'kimetsu'; save(); renderAll();
+  });
+
+  $('btnBuiltinBg').addEventListener('click', function(){
+    DB.settings.bgBuiltin = !builtinBgOn();
+    save(); applyBg();
+  });
+
+  $('btnBgPick').addEventListener('click', function(){ $('bgInput').click(); });
+  $('bgInput').addEventListener('change', function(e){
+    var f = e.target.files && e.target.files[0];
+    e.target.value = '';
+    if(!f) return;
+    if(f.size > 25*1024*1024){ toast('图片太大了，换一张小一点的'); return; }
+    compressImage(f, function(url){
+      if(!url){ toast('图片处理失败'); return; }
+      try{ localStorage.setItem(BGKEY, url); }
+      catch(err){ toast('存储空间不足，换张小一点的图片'); return; }
+      if(typeof DB.settings.bgOpacity !== 'number') DB.settings.bgOpacity = 24;
+      save(); applyBg(); toast('背景已更新');
+    });
+  });
+  $('btnBgClear').addEventListener('click', function(){
+    try{ localStorage.removeItem(BGKEY); }catch(e){}
+    applyBg(); toast('已清除背景图');
+  });
+  $('bgOpacity').addEventListener('input', function(){
+    var op = parseInt(this.value, 10) || 24;
+    DB.settings.bgOpacity = op;
+    $('bgOpacityVal').textContent = op + '%';
+    $('appBg').style.opacity = (op/100).toFixed(2);
+  });
+  $('bgOpacity').addEventListener('change', function(){ save(); });
+  ['patNone','patSei','patIchi','patAsa'].forEach(function(id){
+    $(id).addEventListener('click', function(){
+      DB.settings.pattern = $(id).getAttribute('data-pat');
+      save(); applyPattern();
+    });
+  });
+
+  $('btnExport').addEventListener('click', function(){
+    var data = JSON.stringify(DB, null, 2);
+    var html = '<h3>导出备份</h3>' +
+      '<div class="hint">优先用「下载文件」。若设备不允许下载（用本地文件方式打开时常受限），就用「复制全部」，粘贴到备忘录或微信收藏里保存。</div>' +
+      '<div class="field"><textarea id="expText" readonly style="min-height:190px;font-size:12px;line-height:1.5">' + esc(data) + '</textarea></div>' +
+      '<div class="sheet-btns">' +
+        '<button class="btn btn-primary" id="expDownload" type="button">下载文件</button>' +
+        '<button class="btn btn-ghost" id="expCopy" type="button">复制全部</button>' +
+      '</div>' +
+      '<div class="sheet-btns"><button class="btn btn-outline" id="expClose" type="button">关闭</button></div>';
+    openSheet(html);
+
+    $('expClose').addEventListener('click', closeSheet);
+    $('expDownload').addEventListener('click', function(){
+      try{
+        var blob = new Blob([data], { type:'application/json' });
+        var url = URL.createObjectURL(blob);
+        var a = document.createElement('a');
+        a.href = url;
+        a.download = '练琴打卡备份-' + todayStr() + '.json';
+        document.body.appendChild(a); a.click(); document.body.removeChild(a);
+        setTimeout(function(){ URL.revokeObjectURL(url); }, 1000);
+        toast('备份文件已导出');
+      }catch(e){
+        toast('下载被拦截，请改用「复制全部」');
+      }
+    });
+    $('expCopy').addEventListener('click', function(){
+      var ta = $('expText');
+      ta.removeAttribute('readonly');
+      ta.focus(); ta.select();
+      try{ ta.setSelectionRange(0, ta.value.length); }catch(e){}
+      var ok = false;
+      try{ ok = document.execCommand('copy'); }catch(e){}
+      ta.setAttribute('readonly', 'readonly');
+      toast(ok ? '已复制，粘贴到备忘录保存' : '请长按文本框手动全选复制');
+    });
+  });
+
+  $('btnImport').addEventListener('click', function(){ $('fileInput').click(); });
+  $('fileInput').addEventListener('change', function(e){
+    var f = e.target.files && e.target.files[0];
+    if(!f) return;
+    var fr = new FileReader();
+    fr.onload = function(){
+      try{
+        var d = JSON.parse(fr.result);
+        if(!d || !Array.isArray(d.sessions) || !Array.isArray(d.pieces)) throw new Error('bad');
+        if(!confirm('导入将覆盖当前数据（' + DB.sessions.length + ' 条记录），确定继续？')) return;
+        DB = {
+          version:1,
+          pieces:d.pieces,
+          sessions:d.sessions,
+          settings:(d.settings && typeof d.settings === 'object') ? d.settings : { dailyGoalMin:30 },
+          timer:null
+        };
+        if(typeof DB.settings.dailyGoalMin !== 'number') DB.settings.dailyGoalMin = 30;
+        T = { state:'idle', pieceId:null, baseMs:0, startedAt:0 };
+        stopTick();
+        save(); renderAll(); toast('已导入 ' + DB.sessions.length + ' 条记录');
+      }catch(err){ toast('文件格式不正确'); }
+    };
+    fr.readAsText(f);
+    e.target.value = '';
+  });
+
+  $('btnClear').addEventListener('click', function(){
+    if(!confirm('确定清空全部曲目和练习记录？此操作不可恢复，建议先导出备份。')) return;
+    if(!confirm('再次确认：真的要清空吗？')) return;
+    DB = blank();
+    T = { state:'idle', pieceId:null, baseMs:0, startedAt:0 };
+    curPieceId = null;
+    stopTick(); save(); renderAll(); toast('数据已清空');
+  });
+
+  document.addEventListener('visibilitychange', function(){
+    if(!document.hidden && T.state === 'running'){ paintTimer(); startTick(); }
+  });
+
+  /* ============ 存储可用性自检（防止在无法保存的环境下静默丢数据） ============ */
+  function checkStorage(){
+    try{
+      localStorage.setItem('__pp_test__', '1');
+      if(localStorage.getItem('__pp_test__') !== '1') throw new Error('readback');
+      localStorage.removeItem('__pp_test__');
+      return true;
+    }catch(e){ return false; }
+  }
+  function warnNoStorage(){
+    var bar = document.createElement('div');
+    bar.className = 'storage-warn';
+    bar.innerHTML = '<b>当前打开方式无法保存数据</b>，练习记录退出后会丢失。<br>请改用 Safari / Chrome 正常打开页面，或每次练完在设置里导出备份。';
+    document.body.insertBefore(bar, document.body.firstChild);
+  }
+
+  /* ============ 启动 ============ */
+  DB = load();
+  restoreTimer();
+  renderAll();
+  if(!checkStorage()) warnNoStorage();
+  if(T.state === 'running') startTick();
+})();
+
+/* ============ PWA：离线缓存注册 ============ */
+(function(){
+  var https = (location.protocol === 'https:');
+  var local = (location.hostname === 'localhost' || location.hostname === '127.0.0.1');
+  if(/PianoDakaApp/.test(navigator.userAgent)) return; // 安装包内无需离线缓存
+  if(!('serviceWorker' in navigator) || !(https || local)) return;
+  window.addEventListener('load', function(){
+    navigator.serviceWorker.register('sw.js').catch(function(){});
+  });
+})();
+
+/* ============ 「添加到桌面」提示（仅浏览器内首次访问时出现） ============ */
+(function(){
+  try{
+    var standalone = (window.matchMedia && window.matchMedia('(display-mode: standalone)').matches)
+      || window.navigator.standalone === true;
+    if(standalone) return;
+    if(/PianoDakaApp|AndroidVoice/.test(navigator.userAgent) || typeof window.AndroidVoice !== 'undefined') return;
+    if(localStorage.getItem('pp_install_hint') === 'off') return;
+    var ua = navigator.userAgent || '';
+    var tip;
+    if(/MicroMessenger/i.test(ua)){
+      tip = '在微信里数据不会保存。点右上角「···」→ 在浏览器打开，再添加到主屏幕。';
+    }else if(/HarmonyOS|HuaweiBrowser/i.test(ua)){
+      tip = '点浏览器菜单 →「添加到桌面」，就能像 App 一样打开，断网也能用。';
+    }else if(/Android/i.test(ua)){
+      tip = '点浏览器菜单 →「添加到主屏幕 / 安装应用」，即可全屏使用并离线打卡。';
+    }else if(/iPhone|iPad|iPod/i.test(ua)){
+      tip = '点底部分享 →「添加到主屏幕」，即可像 App 一样全屏使用。';
+    }else{
+      tip = '可把这个页面安装到手机桌面，像 App 一样使用。';
+    }
+    window.addEventListener('load', function(){
+      setTimeout(function(){
+        var bar = document.createElement('div');
+        bar.className = 'install-hint';
+        var txt = document.createElement('em');
+        txt.textContent = tip;
+        var btn = document.createElement('button');
+        btn.textContent = '知道了';
+        btn.addEventListener('click', function(){
+          try{ localStorage.setItem('pp_install_hint', 'off'); }catch(e){}
+          bar.remove();
+        });
+        bar.appendChild(txt); bar.appendChild(btn);
+        document.body.appendChild(bar);
+        setTimeout(function(){ if(bar.parentNode) bar.remove(); }, 15000);
+      }, 2200);
+    });
+  }catch(e){}
+})();
+</script>
+</body>
+</html>
